@@ -3,8 +3,11 @@
 #nivel(Profesional,Standar,Amateur)
 #categoria(Armas, Municiones, Interno, Proteccion, Accesorio, Insumos)
 #pack(Unidad, Pack)
+
 #usuario es quien vende
+
 #python -m pip install colorama
+#pip install pylance
 
 from colorama import Fore, init
 init(autoreset= True)
@@ -97,6 +100,7 @@ mermas = ["006","20-03-2021",30000,
           "008","10-06-2023",160000]
 folio = 109
 user = ""
+password = ""
 fecha = datetime.now().strftime("%d-%m-%Y")
 
 os.system("cls")
@@ -104,6 +108,25 @@ print(Fore.GREEN+"BIENVENIDO AL PUNTO DE VENTA")
 print(Fore.GREEN+"-"*30)
 flag = 0
 flag2 = True
+
+#funciones
+def venta():
+    a= 0
+    
+def devolucion():
+    a=0
+    
+def mantencion():
+    a=0
+    
+def reporte():
+    a=0
+    
+def merma():
+    a=0
+    
+def usuario_sis():
+    a=0
 
 #login
 while True:
