@@ -109,7 +109,7 @@ print(Fore.GREEN+"-"*30)
 flag = 0
 flag2 = True
 
-#funciones
+#area defunciones
 def venta():
     a= 0
     
@@ -127,6 +127,7 @@ def merma():
     
 def usuario_sis():
     a=0
+#fin funciones
 
 #login
 while True:
