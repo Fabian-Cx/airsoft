@@ -2,7 +2,7 @@
 
 #nivel(Profesional,Standar,Amateur)
 #categoria(Armas, Municiones, Interno, Proteccion, Accesorio, Insumos)
-#pack(Unidad, Pack)
+#pack(Unidad, Pack)aaaaa
 #usuario es quien vende
 import os
 from datetime import datetime
