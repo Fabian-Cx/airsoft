@@ -98,3 +98,61 @@ mermas = ["006","20-03-2021",30000,
 folio = 101
 user = ""
 fecha = datetime.now().strftime("%d-%m-%Y")
+
+os.system("cls")
+print(Fore.GREEN+"BIENVENIDO AL PUNTO DE VENTA")
+print(Fore.GREEN+"-"*30)
+flag = 0
+flag2 = True
+
+#login
+while True:
+    user = input(Fore.GREEN+"Ingrese Usuario: ")
+    password = input(Fore.GREEN+"Ingrese Contraseña: ")
+    for i in range(len(usuarios)):
+        if user == usuarios[i] and password == usuarios[i+1]:
+            print(Fore.GREEN+"Usuario Correcto")
+            flag += 1
+            break
+    else:
+        print(Fore.RED+"Usuario o Contraseña Invalido")
+    if flag != 0:
+        break
+    a = input(Fore.GREEN+"volver a intentar s/n ")
+    if a == "n":
+        flag2 = False
+        break
+
+#Menu principal
+opcion = 0
+while flag2:
+    os.system("cls")
+    print(Fore.CYAN+'''    BIENVENIDO AL PUNTO DE VENTA
+    --------------------------------------------
+          1) Venta
+          2) Devolucion
+          3) Mantencion de productos
+          4) Reporte de ventas
+          5) Mermas
+          6) Usuarios del sistema
+          7) Salir''')    
+    opcion = int(input(Fore.CYAN+"Ingrese una opcion: "))
+    try:
+        if opcion == 1:
+            print("")
+        elif opcion == 2:
+            print("")
+        elif opcion == 3:
+            print("")
+        elif opcion == 4:
+            print("")
+        elif opcion == 5:
+            print("")
+        elif opcion == 6:
+            print("")
+        elif opcion == 7:
+            break
+        else:
+            print(Fore.RED+"Opcion invalida")
+    except:
+        print(Fore.RED+"Opcion invalida")
