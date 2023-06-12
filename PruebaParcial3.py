@@ -8,6 +8,7 @@
 
 from colorama import Fore, init
 init(autoreset= True)
+#print(Fore.GREEN)
 import os
 from datetime import datetime
 import numpy as np
