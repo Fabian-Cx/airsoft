@@ -2,8 +2,12 @@
 
 #nivel(Profesional,Standar,Amateur)
 #categoria(Armas, Municiones, Interno, Proteccion, Accesorio, Insumos)
-#pack(Unidad, Pack)aaaaa
+#pack(Unidad, Pack)
 #usuario es quien vende
+#python -m pip install colorama
+
+from colorama import Fore, init
+init(autoreset= True)
 import os
 from datetime import datetime
 import numpy as np
