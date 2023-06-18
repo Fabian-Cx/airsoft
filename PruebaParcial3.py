@@ -401,13 +401,13 @@ while flag:
     opcion = int(input(Fore.CYAN+"Ingrese una opcion: "))
     try:
         if opcion == 1:
-            venta(folio)
+            ventas = venta(ventas, productos, boleta,folio)
         elif opcion == 2:
             devolucion()
         elif opcion == 3:
-            print("")
+            productos = mantenimiento(productos)
         elif opcion == 4:
-            print("")
+            reporte(ventas, user)
         elif opcion == 5:
             print("")
         elif opcion == 6:
