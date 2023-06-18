@@ -130,7 +130,7 @@ def venta(ventas, productos, boleta,folio):
     folio += 1
 
     for i in range(10):
-        id = input("Ingrese el ID del producto a comprar: ")
+        id = input(Fore.CYAN+"Ingrese el ID del producto a comprar: ")
 
         i = 0
         sw = 0
@@ -150,10 +150,10 @@ def venta(ventas, productos, boleta,folio):
             i += 7
 
         if sw == 0:
-            print("Error, el ID no existe")
+            print(Fore.Red+"Error, el ID no existe")
             continue
         else:
-            cantidad = int(input("Ingrese la cantidad que desea: "))
+            cantidad = int(input(Fore.CYAN+"Ingrese la cantidad que desea: "))
             subtotal = cantidad * productos[i + 6]
 
             for i in range(len(boleta)):
@@ -165,19 +165,19 @@ def venta(ventas, productos, boleta,folio):
                     boleta[i][4] = subtotal
                     break
 
-            respuesta = input("¿Desea agregar otro producto? (s/n): ")
+            respuesta = input(Fore.CYAN+"¿Desea agregar otro producto? (s/n): ")
 
             if respuesta == "n":
-                respuesta2 = input("¿Desea comprar los productos de la lista? (s/n): ")
+                respuesta2 = input(Fore.CYAN+"¿Desea comprar los productos de la lista? (s/n): ")
                 if respuesta2 == "s":
                     for i in range(len(boleta)):
                         if boleta[i][0] != 0:
                             ventas.append(boleta[i][:])
 
-                    print("Venta realizada con exito")
+                    print(Fore.GREEN+"Venta realizada con exito")
                     return ventas
                 else:
-                    print("Ok, boleta anulada")
+                    print(Fore.RED+"Ok, boleta anulada")
                     return ventas
 
     return ventas
@@ -257,64 +257,64 @@ def mantenimiento(productos):
     opcion = 0
     while opcion != 5:
         os.system("cls")
-        print(Fore.YELLOW + "MANTENIMIENTO DE PRODUCTOS")
-        print(Fore.YELLOW + "-" * 30)
+        print(Fore.CYAN + "MANTENIMIENTO DE PRODUCTOS")
+        print(Fore.CYAN + "-" * 30)
         print("1. Agregar un nuevo producto")
         print("2. Modificar el stock")
         print("3. Modificar el precio")
         print("4. Imprimir todos los productos")
         print("5. Volver al menú principal")
-        opcion = int(input(Fore.YELLOW + "Ingrese una opción: "))
+        opcion = int(input(Fore.CYAN + "Ingrese una opción: "))
 
         if opcion == "1":
-            id = input("Ingrese el ID del nuevo producto: ")
-            nombre = input("Ingrese el nombre del nuevo producto: ")
-            categoria = input("Ingrese la categoría del nuevo producto: ")
-            nivel = input("Ingrese el nivel del nuevo producto: ")
-            pack = input("Ingrese el tipo de empaque del nuevo producto: ")
-            stock = int(input("Ingrese el stock del nuevo producto: "))
-            precio = float(input("Ingrese el precio del nuevo producto: "))
+            id = input(Fore.CYAN+"Ingrese el ID del nuevo producto: ")
+            nombre = input(Fore.CYAN+"Ingrese el nombre del nuevo producto: ")
+            categoria = input(Fore.CYAN+"Ingrese la categoría del nuevo producto: ")
+            nivel = input(Fore.CYAN+"Ingrese el nivel del nuevo producto: ")
+            pack = input(Fore.CYAN+"Ingrese el tipo de empaque del nuevo producto: ")
+            stock = int(input(Fore.CYAN+"Ingrese el stock del nuevo producto: "))
+            precio = float(input(Fore.CYAN+"Ingrese el precio del nuevo producto: "))
             productos.extend([id, nombre, categoria, nivel, pack, stock, precio])
-            print("Producto agregado con éxito")
+            print(Fore.GREEN+"Producto agregado con éxito")
 
         elif opcion == "2":
-            id = input("Ingrese el ID del producto a modificar el stock: ")
+            id = input(Fore.CYAN+"Ingrese el ID del producto a modificar el stock: ")
             sw = False
             for i in range(0, len(productos), 7):
                 if productos[i] == id:
-                    stock = int(input("Ingrese el nuevo stock del producto: "))
+                    stock = int(input(Fore.CYAN+"Ingrese el nuevo stock del producto: "))
                     productos[i + 5] = stock
                     sw = True
-                    print("Stock modificado con éxito")
+                    print(Fore.GREEN+"Stock modificado con éxito")
                     break
             if not sw:
-                print("Error, el ID del producto no existe")
+                print(Fore.RED+"Error, el ID del producto no existe")
 
         elif opcion == "3":
-            id = input("Ingrese el ID del producto a modificar el precio: ")
+            id = input(Fore.CYAN+"Ingrese el ID del producto a modificar el precio: ")
             sw = False
             for i in range(0, len(productos), 7):
                 if productos[i] == id:
-                    precio = float(input("Ingrese el nuevo precio del producto: "))
+                    precio = float(input(Fore.CYAN+"Ingrese el nuevo precio del producto: "))
                     productos[i + 6] = precio
                     sw = True
-                    print("Precio modificado con éxito")
+                    print(Fore.GREEN+"Precio modificado con éxito")
                     break
             if not sw:
-                print("Error, el ID del producto no existe")
+                print(Fore.RED+"Error, el ID del producto no existe")
 
         elif opcion == "4":
-            print("Lista de productos:")
+            print(Fore.CYAN+"Lista de productos:")
             for i in range(0, len(productos), 7):
                 print("ID:", productos[i], "Nombre:", productos[i + 1], "Categoría:", productos[i + 2], "Nivel:", productos[i + 3], "Pack:", productos[i + 4], "Stock:", productos[i + 5], "Precio:", productos[i + 6])
-            input("Presione Enter para continuar...")
+            input(Fore.CYAN+"Presione Enter para continuar...")
 
         elif opcion == "5":
             break
 
         else:
             print(Fore.RED + "Opción inválida")
-            input("Presione Enter para continuar...")
+            input(Fore.CYAN+"Presione Enter para continuar...")
 
     return productos
     
@@ -322,55 +322,55 @@ def reporte(ventas, user):
     opcion = 0
     while opcion != 5:
         os.system("cls")
-        print(Fore.YELLOW + "REPORTE DE VENTAS")
-        print(Fore.YELLOW + "-" * 30)
-        print("1. Reporte de totales por mes")
-        print("2. Reporte de totales por año")
-        print("3. Reporte de totales por mes del vendedor")
-        print("4. Reporte de totales por año del vendedor")
-        print("5. Volver al menú principal")
-        opcion = input(Fore.YELLOW + "Ingrese una opción: ")
+        print(Fore.CYAN + "REPORTE DE VENTAS")
+        print(Fore.CYAN + "-" * 30)
+        print(Fore.CYAN +"1. Reporte de totales por mes")
+        print(Fore.CYAN +"2. Reporte de totales por año")
+        print(Fore.CYAN +"3. Reporte de totales por mes del vendedor")
+        print(Fore.CYAN +"4. Reporte de totales por año del vendedor")
+        print(Fore.CYAN +"5. Volver al menú principal")
+        opcion = input(Fore.CYAN + "Ingrese una opción: ")
 
         if opcion == "1":
-            mes = input("Ingrese el mes y año (mm-aaaa) para el reporte: ")
+            mes = input(Fore.CYAN +"Ingrese el mes y año (mm-aaaa) para el reporte: ")
             total = 0
             for venta in ventas:
                 fecha = venta[2]
                 if fecha.endswith(mes):
                     total += venta[5]
-            print("Total de ventas para el mes " + mes + ": $" + str(total))
+            print(Fore.GREEN +"Total de ventas para el mes " + mes + ": $" + str(total))
 
         elif opcion == "2":
-            año = input("Ingrese el año para el reporte: ")
+            año = input(Fore.CYAN +"Ingrese el año para el reporte: ")
             total = 0
             for venta in ventas:
                 fecha = venta[2]
                 if fecha[-4:] == año:
                     total += venta[5]
-            print("Total de ventas para el año " + año + ": $" + str(total))
+            print(Fore.GREEN +"Total de ventas para el año " + año + ": $" + str(total))
 
         elif opcion == "3":
-            mes = input("Ingrese el mes y año (mm-aaaa) para el reporte: ")
+            mes = input(Fore.CYAN +"Ingrese el mes y año (mm-aaaa) para el reporte: ")
             total = 0
             for venta in ventas:
                 if venta[1] == user and venta[2].endswith(mes):
                     total += venta[5]
-            print("Total de ventas para el vendedor " + user + " en el mes " + mes + ": $" + str(total))
+            print(Fore.GREEN +"Total de ventas para el vendedor " + user + " en el mes " + mes + ": $" + str(total))
 
         elif opcion == "4":
-            año = input("Ingrese el año para el reporte: ")
+            año = input(Fore.CYAN +"Ingrese el año para el reporte: ")
             total = 0
             for venta in ventas:
                 if venta[1] == user and venta[2][-4:] == año:
                     total += venta[5]
-            print("Total de ventas para el vendedor " + user + " en el año " + año + ": $" + str(total))
+            print(Fore.GREEN +"Total de ventas para el vendedor " + user + " en el año " + año + ": $" + str(total))
 
         elif opcion == "5":
             break
 
         else:
             print(Fore.RED + "Opción inválida")
-            input("Presione Enter para continuar...")
+            input(Fore.CYAN +"Presione Enter para continuar...")
 
 #las dos de abajo    
 def merma():
