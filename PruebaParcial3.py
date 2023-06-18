@@ -110,8 +110,61 @@ flag = 0
 flag2 = True
 
 #area defunciones
-def venta():
-    a= 0
+def venta(ventas, productos, boleta):
+    folio += 1
+
+    for i in range(10):
+        id = input("Ingrese el ID del producto a comprar: ")
+
+        i = 0
+        sw = 0
+        while i < len(productos):
+            if productos[i] == id:
+                sw = 1  # encontrado
+                print(
+                    productos[i],
+                    " ",
+                    productos[i + 1],
+                    " ",
+                    productos[i + 2],
+                    " ",
+                    productos[i + 3],
+                )
+                break
+            i += 7
+
+        if sw == 0:
+            print("Error, el ID no existe")
+            continue
+        else:
+            cantidad = int(input("Ingrese la cantidad que desea: "))
+            subtotal = cantidad * productos[i + 6]
+
+            for i in range(len(boleta)):
+                if boleta[i][0] == 0:
+                    boleta[i][0] = folio
+                    boleta[i][1] = fecha
+                    boleta[i][2] = id
+                    boleta[i][3] = cantidad
+                    boleta[i][4] = subtotal
+                    break
+
+            respuesta = input("¿Desea agregar otro producto? (s/n): ")
+
+            if respuesta == "n":
+                respuesta2 = input("¿Desea comprar los productos de la lista? (s/n): ")
+                if respuesta2 == "s":
+                    for i in range(len(boleta)):
+                        if boleta[i][0] != 0:
+                            ventas.append(boleta[i][:])
+
+                    print("Venta realizada con exito")
+                    return ventas
+                else:
+                    print("Ok, boleta anulada")
+                    return ventas
+
+    return ventas
     
 def devolucion():
     a=0
@@ -163,7 +216,7 @@ while flag2:
     opcion = int(input(Fore.CYAN+"Ingrese una opcion: "))
     try:
         if opcion == 1:
-            print("")
+            ventas = venta(ventas, productos, boleta)
         elif opcion == 2:
             print("")
         elif opcion == 3:
