@@ -106,10 +106,26 @@ fecha = datetime.now().strftime("%d-%m-%Y")
 os.system("cls")
 print(Fore.GREEN+"BIENVENIDO AL PUNTO DE VENTA")
 print(Fore.GREEN+"-"*30)
-flag = 0
-flag2 = True
+flag = True
 
-#area defunciones
+#funciones
+def login():
+    while True:
+        os.system("cls")
+        cont = ""
+        print(Fore.GREEN+"BIENVENIDO AL PUNTO DE VENTA")
+        print(Fore.GREEN+"-"*30)
+        user = input(Fore.GREEN+"Ingrese usuario: ")
+        password = input(Fore.GREEN+"Ingrese contraseña: ")
+        for n in range(len(usuarios)):
+            if user == usuarios[n] and password == usuarios[n+1]:
+                return user
+        else:
+            print(Fore.RED+"ERROR! Usuario o contraseña incorrecta")
+        cont = input(Fore.GREEN+"Desea volver a intentarlo s/n: ")
+        if cont == "n":
+            return ""
+
 def venta(ventas, productos, boleta,folio):
     folio += 1
 
@@ -167,8 +183,76 @@ def venta(ventas, productos, boleta,folio):
     return ventas
     
 def devolucion():
-    a=0
+    os.system("cls")
+    print(Fore.CYAN+"DEBOLUCIONES")
+    print(Fore.CYAN+"-"*30)
+    bol = int(input(Fore.CYAN+"Ingrese numero de folio: "))
+    cont = 0
+    op = 0; op2 = 0; op3 = 0
+    borrar = []
+    for i in range(len(ventas)):
+        if ventas[i] == bol:
+            boleta[cont][0]=ventas[i]
+            boleta[cont][1]=ventas[i+1]
+            boleta[cont][2]=ventas[i+2]
+            boleta[cont][3]=ventas[i+3]
+            boleta[cont][4]=ventas[i+4]
+            boleta[cont][5]=ventas[i+5]
+            cont += 1
+            borrar.insert(0,i)
+    for i in borrar:
+        for n in range(6):
+            ventas.pop(i)
+    if cont == 0:
+        print(Fore.RED+"No hay boletas con ese folio")
     
+    print(f'''Devolver folio {bol}
+          1) Percial
+          2) Todo''')
+    op = int(input(Fore.CYAN+"Ingrese opcion: "))
+    if op == 1:#devolver parcial
+        for n in range(4):#despues cambialo a 10 #toma el primer producto a devolver
+            for r in range(len(productos)):#lo busca en los productos
+                if boleta[n][3] == productos[r]:
+                    os.system("cls")
+                    print(Fore.CYAN+f'''Devoler {productos[r+1]}:
+            1)si
+            2)no''')
+                    op2 = int(input(Fore.CYAN+"Ingrese una opcion: "))#si se devuelve o no
+                    if op2 == 1:
+                        print(Fore.CYAN+'''\nEs merma s/n
+            1) si
+            2) no''')#si es merma
+                        op3 = int(input(Fore.CYAN+"Ingrese una opcion: "))
+                        if op3 == 1:
+                            mermas.extend([boleta[n][3],fecha,boleta[n][5]])
+                        elif op3 == 2:
+                            cantidad = int(boleta[n][4])
+                            productos[r+5] = productos[r+5]+cantidad
+                    elif op2 == 2:
+                        ventas.extend([boleta[n][0],boleta[n][1],boleta[n][2],boleta[n][3],boleta[n][4],boleta[n][5]])
+    elif op == 2:
+        for n in range(4):#despues cambialo a 10
+            for r in range(len(productos)):
+                if boleta[n][3] == productos[r]:
+                    print(Fore.CYAN+f'''Producto {productos[r+1]}, es merma:
+            1) si
+            2) no''')
+                    op2 = int(input(Fore.CYAN+"Ingrese una opcion: "))
+                    if op2 == 1:
+                        mermas.extend([boleta[n][3],fecha,boleta[n][5]])
+                    elif op2 == 2:
+                        ventas.extend([boleta[n][0],boleta[n][1],boleta[n][2],boleta[n][3],boleta[n][4],boleta[n][5]])
+    for l in range(4):#cambiar a 10
+        boleta[l][0] = 0
+        boleta[l][1] = ""
+        boleta[l][2] = ""
+        boleta[l][3] = ""
+        boleta[l][4] = 0
+        boleta[l][5] = 0
+    print(Fore.CYAN+"\nFin de devoluciones")
+    os.system("pause")
+        
 def mantenimiento(productos):
     opcion = 0
     while opcion != 5:
@@ -233,7 +317,6 @@ def mantenimiento(productos):
             input("Presione Enter para continuar...")
 
     return productos
-
     
 def reporte(ventas, user):
     opcion = 0
@@ -288,35 +371,23 @@ def reporte(ventas, user):
         else:
             print(Fore.RED + "Opción inválida")
             input("Presione Enter para continuar...")
-    
+
+#las dos de abajo    
 def merma():
     a=0
     
 def usuario_sis():
     a=0
-#fin funciones
 
 #login
-while True:
-    user = input(Fore.GREEN+"Ingrese Usuario: ")
-    password = input(Fore.GREEN+"Ingrese Contraseña: ")
-    for i in range(len(usuarios)):
-        if user == usuarios[i] and password == usuarios[i+1]:
-            print(Fore.GREEN+"Usuario Correcto")
-            flag += 1
-            break
-    else:
-        print(Fore.RED+"Usuario o Contraseña Invalido")
-    if flag != 0:
-        break
-    a = input(Fore.GREEN+"volver a intentar s/n ")
-    if a == "n":
-        flag2 = False
-        break
+user = login()
+if user != "":
+    flag = True
+
 
 #Menu principal
 opcion = 0
-while flag2:
+while flag:
     os.system("cls")
     print(Fore.CYAN+'''    BIENVENIDO AL PUNTO DE VENTA
     --------------------------------------------
@@ -330,13 +401,13 @@ while flag2:
     opcion = int(input(Fore.CYAN+"Ingrese una opcion: "))
     try:
         if opcion == 1:
-            ventas = venta(ventas, productos, boleta,folio)
+            venta(folio)
         elif opcion == 2:
-            print("")
+            devolucion()
         elif opcion == 3:
-            productos = mantenimiento(productos)
+            print("")
         elif opcion == 4:
-            reporte(ventas, user) 
+            print("")
         elif opcion == 5:
             print("")
         elif opcion == 6:
