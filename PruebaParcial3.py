@@ -335,20 +335,20 @@ def reporte(ventas, user):
             mes = input(Fore.CYAN +"Ingrese el mes y año (mm-aaaa) para el reporte: ")
             total = 0
             for v in range(0,len(ventas),6):
-                fec = ventas[v+2]
-                if fec.endswith(mes):
+                fecha = ventas[v+2]
+                if fecha.endswith(mes):
                     total += ventas[v+5]
             print(Fore.GREEN +"Total de ventas para el mes " + mes + ": $" + str(total))
             os.system("pause")
 
         elif opcion == "2":
-            year = input(Fore.CYAN +"Ingrese el año para el reporte: ")
+            año = input(Fore.CYAN +"Ingrese el año para el reporte: ")
             total = 0
             for v in range(0,len(ventas),6):
-                fec = ventas[v+2]
-                if fec[-4:] == year:
+                fecha = ventas[v+2]
+                if fecha[-4:] == año:
                     total += ventas[v+5]
-            print(Fore.GREEN +"Total de ventas para el año " + year + ": $" + str(total))
+            print(Fore.GREEN +"Total de ventas para el año " + año + ": $" + str(total))
             os.system("pause")
 
         elif opcion == "3":
@@ -361,12 +361,12 @@ def reporte(ventas, user):
             os.system("pause")
 
         elif opcion == "4":
-            year = input(Fore.CYAN +"Ingrese el año para el reporte: ")
+            año = input(Fore.CYAN +"Ingrese el año para el reporte: ")
             total = 0
             for v in range(0,len(ventas),6):
-                if ventas[v+1] == user and ventas[v+2][-4:] == year:
+                if ventas[v+1] == user and ventas[v+2][-4:] == año:
                     total += ventas[v+5]
-            print(Fore.GREEN +"Total de ventas para el vendedor " + user + " en el año " + year + ": $" + str(total))
+            print(Fore.GREEN +"Total de ventas para el vendedor " + user + " en el año " + año + ": $" + str(total))
             os.system("pause")
 
         elif opcion == "5":
