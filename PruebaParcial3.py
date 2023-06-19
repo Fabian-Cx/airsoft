@@ -11,7 +11,7 @@
 
 from colorama import Fore, init
 init(autoreset= True)
-#print(Fore.GREEN)
+#print(Fore.CYAN) 
 import os
 from datetime import datetime
 import numpy as np
