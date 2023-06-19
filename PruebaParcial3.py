@@ -416,7 +416,195 @@ def merma():
     os.system("pause")
     
 def usuario_sis():
-    a=0
+    while True:
+        op = 0; op2 = ""; op3 = 0; rut = ""; nombre = ""; usu = ""; passw = ""
+        os.system("cls")
+        print(Fore.CYAN+"MENU DE USUARIOS\n","-"*30)
+        print(Fore.CYAN+'''Seleccione una opcion:
+        1) Crear usuario
+        2) Buscar usuario
+        3) Listar usuarios
+        4) Modificar usuario
+        5) Eliminar usuario
+        6) Salir''')
+        op = int(input(Fore.CYAN+"Ingrese una opcion: "))
+        print("")
+        if op == 1:
+            print(Fore.CYAN+"Crear usuario\n","-"*15)
+            while True:
+                fl = 0
+                rut = input(Fore.CYAN+"Ingrese rut del nuevo usuario: ")
+                for n in range(0,len(usuarios),4):
+                    if usuarios[n]==rut:
+                        fl += 1
+                if fl > 0:
+                    print(Fore.CYAN+"El rut ya esta registrado, intente con otro")
+                else:
+                    break
+            nombre = input(Fore.CYAN+"Ingrese nombre del nuevo usuario: ")
+            while True:
+                fl = 0
+                usu = input(Fore.CYAN+"Ingrese nombre de usuario del nuevo usuario: ")
+                for n in range(2,len(usuarios),4):
+                    if usuarios[n]==usu:
+                        fl += 1
+                if fl > 0:
+                    print(Fore.CYAN+"El nombre de usuario ya esta registrado, intente con otro")
+                else:
+                    break
+            passw = input(Fore.CYAN+"Ingrese contraseña del nuevo usuario: ")
+            op2 = input(Fore.CYAN+"\nDesea ingresar al nuevo usuario s/n: ")
+            if op2 == "s" or op2 == "S":
+                usuarios.extend([rut,nombre,usu,passw])
+                print(Fore.CYAN+"Usuario creado exitosamente")
+                os.system("pause")
+            else:
+                print(Fore.CYAN+"El usuario no se agrego")
+                os.system("pause")
+        elif op == 2:
+            print(Fore.CYAN+"Buscar usuario\n","-"*15)
+            print(Fore.CYAN+'''Escoja por cual metodo buscar:
+        1) Rut
+        2) Nombre
+        3) Nombre de usuario''')
+            op3 = int(input(Fore.CYAN+"Ingrese una opcion: "))
+            if op3 == 1:
+                op2 = input(Fore.CYAN+"Ingrese rut: ")
+                for n in range(0,len(usuarios),4):
+                    if usuarios[n] == op2:
+                        print(Fore.CYAN+f'''    Rut encontrado:
+            Rut: {usuarios[n]}
+            Nombre: {usuarios[n+1]}
+            Nombre de usuario: {usuarios[n+2]}
+            Contraseña: {usuarios[n+3]}''')
+                os.system("pause")
+            elif op3 == 2:
+                op2 = input(Fore.CYAN+"Ingrese nombre: ")
+                for n in range(1,len(usuarios),4):
+                    if usuarios[n] == op2:
+                        print(Fore.CYAN+f'''    Nombre encontrado:
+            Rut: {usuarios[n-1]}
+            Nombre: {usuarios[n]}
+            Nombre de usuario: {usuarios[n+1]}
+            Contraseña: {usuarios[n+2]}''')
+                os.system("pause")
+            elif op3 == 3:
+                op2 = input(Fore.CYAN+"Ingrese nombre de usuario: ")
+                for n in range(2,len(usuarios),4):
+                    if usuarios[n] == op2:
+                        print(Fore.CYAN+f'''    Nombre de usuario encontrado:
+            Rut: {usuarios[n-2]}
+            Nombre: {usuarios[n-1]}
+            Nombre de usuario: {usuarios[n]}
+            Contraseña: {usuarios[n+1]}''')
+                os.system("pause")
+        elif op == 3:
+            cont = 1
+            print(Fore.CYAN+"Listado de usuarios\n","-"*15)
+            for n in range(0,len(usuarios),4):
+                print(Fore.CYAN+f"        {cont}) {usuarios[n]} / {usuarios[n+1]} / {usuarios[n+2]} / {usuarios[n+3]}")
+                cont += 1
+            os.system("pause")
+        elif op == 4:
+            print(Fore.CYAN+"Modificar usuario\n","-"*15)
+            rut = input(Fore.CYAN+"Ingrese rut del usuario a modificar: ")
+            cont = 0
+            for c in range(0,len(usuarios),4):
+                if usuarios[c] == rut:
+                    cont += 1
+                    print(Fore.CYAN+'''\nIngrese que opcion quiere modificar:
+        1) Rut
+        2) Nombre
+        3) Nombre de usuario
+        4) Contraseña
+        5) Todo''')
+                    op3 = int(input(Fore.CYAN+"Ingrese una opcion: "))
+                    if op3 == 1:
+                        while True:
+                            fl = 0
+                            rut = input(Fore.CYAN+"Ingrese nuevo rut: ")
+                            for n in range(0,len(usuarios),4):
+                                if usuarios[n] == rut:
+                                    fl += 1
+                            if fl > 0:
+                                print(Fore.CYAN+"El rut ya esta registrado, intente con otro")
+                            else:
+                                usuarios[c] = rut
+                                break
+                        os.system("pause")
+                    elif op3 == 2:
+                        nombre = input(Fore.CYAN+"Ingrese nuevo nombre: ")
+                        usuarios[c+1] = nombre
+                        os.system("pause")
+                    elif op3 == 3:
+                        while True:
+                            fl = 0
+                            usu = input(Fore.CYAN+"Ingrese nuevo nombre de usuario: ")
+                            for n in range(0,len(usuarios),4):
+                                if usuarios[n+2] == usu:
+                                    fl += 1
+                            if fl > 0:
+                                print(Fore.CYAN+"El nombre de usuario ya esta registrado, intente con otro")
+                            else:
+                                usuarios[c+2] = usu
+                                break
+                        os.system("pause")
+                    elif op3 == 4:
+                        passw = input(Fore.CYAN+"Ingrese nueva contraseña: ")
+                        usuarios[c+3] = passw
+                        os.system("pause")
+                    elif op3 == 5:
+                        while True:
+                            fl = 0
+                            rut = input(Fore.CYAN+"Ingrese nuevo rut: ")
+                            for n in range(0,len(usuarios),4):
+                                if usuarios[n] == rut:
+                                    fl += 1
+                            if fl > 0:
+                                print(Fore.CYAN+"El rut ya esta registrado, intente con otro")
+                            else:
+                                usuarios[c] = rut
+                                break
+                        nombre = input(Fore.CYAN+"Ingrese nuevo nombre: ")
+                        usuarios[c+1] = nombre
+                        while True:
+                            fl = 0
+                            usu = input(Fore.CYAN+"Ingrese nuevo nombre de usuario: ")
+                            for n in range(0,len(usuarios),4):
+                                if usuarios[n+2] == usu:
+                                    fl += 1
+                            if fl > 0:
+                                print(Fore.CYAN+"El nombre de usuario ya esta registrado, intente con otro")
+                            else:
+                                usuarios[c+2] = usu
+                                break
+                        passw = input(Fore.CYAN+"Ingrese nueva contraseña: ")
+                        usuarios[c+3] = passw
+                        os.system("pause")
+            if cont == 0:
+                print(Fore.CYAN+"Rut no encontrado")
+                os.system("pause")
+        elif op == 5:
+            cont = 0; op2 = ""
+            print(Fore.CYAN+"Eliminar usuario\n","-"*15)
+            rut = input(Fore.CYAN+"\nIngrese rut que desea elimiar: ")
+            for g in range(0,len(usuarios),4):
+                if usuarios[g] == rut:
+                    cont += 1
+                    print(f'''\nUsuario:
+                {usuarios[g]} / {usuarios[g+1]} / {usuarios[g+2]} / {usuarios[g+3]}''')
+                    op2 = input(Fore.CYAN+"Desea eliminar este usuario s/n: ")
+                    if op2 == "s":
+                        for n in range(4):
+                            usuarios.pop(g)
+                        print(Fore.CYAN+"Usuario eliminado")
+                        os.system("pause")
+                    else:
+                        print(Fore.CYAN+"Eliminacion cancelada")
+                        os.system("pause")
+                    break
+        elif op == 6:
+            break
 
 #login
 user = login()
