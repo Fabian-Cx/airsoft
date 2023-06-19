@@ -636,9 +636,9 @@ while flag:
         elif opcion == 4:
             reporte(ventas, user)
         elif opcion == 5:
-            print("")
+            merma()
         elif opcion == 6:
-            print("")
+            usuario_sis()
         elif opcion == 7:
             break
         else:
