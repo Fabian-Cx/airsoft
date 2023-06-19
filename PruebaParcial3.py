@@ -371,10 +371,49 @@ def reporte(ventas, user):
         else:
             print(Fore.RED + "Opción inválida")
             input(Fore.CYAN +"Presione Enter para continuar...")
-
-#las dos de abajo    
+  
 def merma():
-    a=0
+    op = 0; f = ""; cont = 1; flag2 = False; fe = ""
+    os.system("cls")
+    print(Fore.CYAN+'''Menu de Mermas
+    Que sistema de busqueda desea:
+        1) por fecha
+        2) por mes
+        3) por año''')
+    op = int(input(Fore.CYAN+"Ingrese una opcion: "))
+    if op == 1:
+        f = input(Fore.CYAN+"Ingrese la fecha en formato 'dd-mm-aaaa': ")
+        print(Fore.CYAN+f"\nMermas del la fecha {f}:")
+        for n in range(1,len(mermas),3):
+            if mermas[n] == f:
+                flag2 = True
+                print(Fore.CYAN+f"    {cont})",mermas[n-1],mermas[n],mermas[n+1])
+                cont += 1
+        if flag2 == False:
+            print(Fore.CYAN+"No existen mermas en esa fecha")
+    elif op == 2:
+        f = input(Fore.CYAN+"Ingrese la fecha en formato 'mm-aaaa': ")
+        print(Fore.CYAN+f"\nMermas del mes {f}:")
+        for n in range(1,len(mermas),3):
+            fe = mermas[n]
+            if fe[3:] == f:
+                flag2 = True
+                print(Fore.CYAN+f"    {cont})",mermas[n-1],mermas[n],mermas[n+1])
+                cont += 1
+        if flag2 == False:
+            print(Fore.CYAN+"No existen mermas en esa fecha")
+    elif op == 3:
+        f = input(Fore.CYAN+"Ingrese la fecha en formato 'aaaa': ")
+        print(Fore.CYAN+f"\nMermas del año {f}:")
+        for n in range(1,len(mermas),3):
+            fe = mermas[n]
+            if fe[6:] == f:
+                flag2 = True
+                print(Fore.CYAN+f"    {cont})",mermas[n-1],mermas[n],mermas[n+1])
+                cont += 1
+        if flag2 == False:
+            print(Fore.CYAN+"No existen mermas en esa fecha")
+    os.system("pause")
     
 def usuario_sis():
     a=0
